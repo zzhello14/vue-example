@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>v-for</title>
+</head>
+<body>
+    <h1>v-for指令</h1>
+    <hr>
+    <div id="app">
+        <h3>普通循环(原数组对象)</h3>
+        <ul>
+            <li v-for="item in items">{{item}}</li>
+        </ul>
+        <h3>数组简单（默认）排序</h3>
+        <ul>
+            <li v-for="item in sortedItems">{{item}}</li>
+        </ul>
+        <h3>数组自定义排序</h3>
+        <ul>
+            <li v-for="item in sortedCustomItems">{{item}}</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                items:[11,8,13,4,35,26,2,58,49]
+            },
+            computed:{
+                sortedItems:function(){
+                    var newItems = this.items.slice(0);
+                    // 必须拷贝新数组，不然sort()后改变原数据
+                    return newItems.sort();
+                },
+                sortedCustomItems:function(){
+                    var newItems = this.items.slice(0);
+                    return newItems.sort(this.sortNumber);
+                }
+            },
+            methods:{
+                sortNumber:function(a,b){
+                    return a - b;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

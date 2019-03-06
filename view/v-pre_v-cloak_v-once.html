@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>v-pre & v-cloak & v-once</title>
+</head>
+<body>
+    <h1>v-pre & v-cloak & v-once指令</h1>
+    <hr>
+    <div id="app">
+        <h3>v-pre指令</h3>
+        在模板中跳过vue的编译，直接输出原始值。
+        <br>
+        <div v-pre>{{message}}</div>
+        <h3>v-cloak指令</h3>
+        在vue渲染完指定的整个DOM后才进行显示。它必须和CSS样式一起使用。
+        <br>
+        <div v-cloak>{{message}}</div>
+        <h3>v-once指令</h3>
+        在第一次DOM时进行渲染，渲染完成后视为静态内容，跳出以后的渲染过程。
+        <br>
+        第一次渲染结果：<div v-once>{{message}}</div>
+        <br>
+        message值更改：<input type="text" v-model="message">
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                message:"文本消息"
+            }
+        })
+    </script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>v-on</title>
+</head>
+<body>
+    <h1>v-on指令</h1>
+    <hr>
+    <div id="app">
+        数值：{{score}}
+        <br>
+        <button @click="add">加1</button>
+        <button @click="sub">减1</button>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                score:0
+            },
+            methods:{
+                add:function(){
+                    this.score++;
+                },
+                sub:function(){
+                    this.score--;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

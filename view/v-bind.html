@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>v-bind</title>
+</head>
+<body>
+    <h1>v-bind指令</h1>
+    <hr>
+    <div id="app">
+        v-bind是处理html中的标签属性的,下面v-bind绑定img的src标签进行动态赋值：
+        <br>
+        <br>
+        <input type="radio" id="one" value="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3320720394,3499436538&fm=26&gp=0.jpg" v-model="imgSrc">
+        <label for="one">vue1</label>
+        <input type="radio" id="two" value="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1521722355,149999211&fm=26&gp=0.jpg" v-model="imgSrc">
+        <label for="one">vue2</label>
+        <br>
+        <img v-bind:src="imgSrc" alt="" width="200">
+        <!-- v-bind可缩写为:，即v-bind:src可直接写:src -->
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                imgSrc:''
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>v-if & v-els & v-show</title>
+</head>
+<body>
+    <h1>v-if & v-els & v-show指令</h1>
+    <hr>
+    <div id="app">
+        <input type="radio" id="one" value="1" v-model="isLogin"><label for="one">登录</label>
+        <input type="radio" id="two" value="0" v-model="isLogin"><label for="two">注销</label>
+        <!-- 可以借助method对data属性赋值
+        <input name="rd" type="radio" id="one" v-bind:value="isLogin" @click="login"><label for="one">登录</label>
+        <input name="rd" type="radio" id="two" v-bind:value="!isLogin" @click="logout"><label for="two">注销</label>-->
+        <br>
+        <br>
+        <div v-if="isLogin==1">你好：zzHello</div>
+        <div v-else>请登录</div>
+        <div v-show="isLogin==1">你的ID是：xxxx-xxxx</div>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                isLogin:false
+            },
+            methods:{
+                login(){
+                    this.isLogin = true;
+                },
+                logout(){
+                    this.isLogin = false;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
