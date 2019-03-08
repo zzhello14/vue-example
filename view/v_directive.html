@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue.directive自定义指令</title>
+</head>
+<body>
+    <h1>Vue.directive自定义指令</h1>
+    <hr>
+    <div id="app">
+        <div v-zzcolor="color">{{num}}</div>    
+        <div>
+            <button @click="add">Add</button>
+            <br>
+            <button onclick="unbind()">UnBind</button>
+        </div>
+        <h3>自定义指令中传递的三个参数</h3>
+        <ul>
+            <li>el: 指令所绑定的元素，可以用来直接操作DOM。</li>
+            <li>binding: 一个对象，包含指令的很多信息。</li>
+            <li>vnode: Vue编译生成的虚拟节点。</li>
+        </ul>
+        <h3>自定义指令的生命周期</h3>
+        <div>自定义指令有五个生命周期（也叫钩子函数），分别是 bind,inserted,update,componentUpdated,unbind</div>
+        <ol>
+            <li>bind:只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个绑定时执行一次的初始化动作。</li>
+            <li>inserted:被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于document中）。</li>
+            <li>update:被绑定于元素所在的模板更新时调用，而无论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新。</li>
+            <li>componentUpdated:被绑定元素所在模板完成一次更新周期时调用。</li>
+            <li>unbind:只调用一次，指令与元素解绑时调用。</li>
+        </ol>
+    </div>
+    
+    <script type="text/javascript">
+        function unbind(){
+            app.$destroy();
+        }
+        // 第2个参数传入方法数组,如果只有1个方法即写为
+        // Vue.directive('zzcolor',function(el,binding,vnode){
+            // ......
+        //})
+        Vue.directive('zzcolor',{
+            bind:function(el,binding,vnode){//被绑定
+                el.style='color:'+binding.value;
+                console.log('1 - bind');
+            },
+            inserted:function(){//绑定到节点
+                console.log('2 - inserted');
+            },
+            update:function(){//组件更新
+                console.log('3 - update');
+            },
+            componentUpdated:function(){//组件更新完成
+                console.log('4 - componentUpdated');
+            },
+            unbind:function(){//解绑
+                console.log('5 - unbind');
+            }
+        });
+        var app=new Vue({
+            el:'#app',
+            data:{
+                num:0,
+                color:'red'
+            },
+            methods:{
+                add:function(){
+                    this.num++;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
