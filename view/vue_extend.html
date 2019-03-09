@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue.extend扩展实例构造器</title>
+</head>
+<body>
+    <h1>Vue.extend扩展实例构造器</h1>
+    <hr>
+    <div>Vue.extend 返回的是一个“扩展实例构造器”,也就是预设了部分选项的Vue实例构造器。</div>
+    <br>
+    点击作者链接获取源码：<author></author>
+    <div id="authorId"></div>
+    
+    <script type="text/javascript">
+        var authorExtend = Vue.extend({
+            template:"<p><a :href='authorUrl' target='_blank'>{{authorName}}</a></p>",
+            data:function(){
+                return{
+                    authorName:"zzhello",
+                    authorUrl:"https://github.com/zzhello14/vue-example"
+                }
+            }
+        });
+        // 扩展实例构造器需要加载才起作用
+        new authorExtend().$mount('author');//可绑定标签名称
+        new authorExtend().$mount('#authorId');//可绑定dom元素id或classt等其他属性
+    </script>
+</body>
+</html>
