@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue.component-注册组件</title>
+</head>
+<body>
+    <h1>Vue.component-注册组件</h1>
+    <hr>
+    <h3>全局注册组件</h3>
+    <div>在div app(vue实例app)中引入全局注册的组件zzhello</div>
+    <div id="app">
+        <!-- 引入全局组件 -->
+        <zzhello></zzhello>
+        <zzhello2></zzhello2>
+    </div>
+    <div>在div app2(vue实例app2)中引入全局注册的组件zzhello</div>
+    <div id="app2">
+        <!-- 引入全局组件 -->
+        <zzhello></zzhello>
+        <!-- 下面代码不起作用,无法引用在app实例中注册的局部组件 -->
+        <zzhello2></zzhello2>
+    </div>
+    <br>
+    <h3>局部注册组件</h3>
+    <div>局部注册的组件只能在所注册的组件的作用域内引用</div>
+
+    <script type="text/javascript">
+        // 全局注册组件，在别的地方也可以引用
+        Vue.component('zzhello',{
+            template:`<h1 style="color:red">这是一个组件</h1>`
+        })
+
+        var app = new Vue({
+            el:'#app',
+            data:{
+                
+            },
+            components:{
+                "zzhello2":{
+                    template:`<h1 style="color:green">这是在app实例内注册的的组件</h1>`
+                }
+            }
+        })
+
+        var app2 = new Vue({
+            el:'#app2'
+        })
+    </script>
+</body>
+</html>
