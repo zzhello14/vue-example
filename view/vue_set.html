@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue.set全局操作</title>
+</head>
+<body>
+    <h1>Vue.set全局操作</h1>
+    <hr>
+    <div>Vue.set 的作用就是在构造器外部操作构造器内部的数据、属性或者方法。</div>
+    <div id="app">
+        <div>count: {{count}}</div>
+        <div>
+            <ul>
+                <li v-for="(item, index) in items" :key="index">{{item}}</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <button onclick="changeCount()">changeCount</button>
+        <button onclick="changeArray()">changeArray</button>
+    </div>
+    
+    <script type="text/javascript">
+        // 外部数据
+        var outData = {
+            count:0,
+            goodName:'car',
+            items:['aaaa','bbbb','cccc']
+        }
+        function changeCount(){
+            // 3种方式均可以操作外部数据
+            //outData.count++;
+            //app.count++;
+            Vue.set(outData,'count',4);
+        }
+        function changeArray(){
+            //app.items[1] = "ddd";//此操作改變item[1]的值，页面不会自动刷新  
+            Vue.set(outData.items,1,"ddd")//此操作页面会自动刷新
+        }
+        var app = new Vue({
+            el:"#app",
+            // 引用外部数据
+            data:outData
+        })
+    </script>
+</body>
+</html>
