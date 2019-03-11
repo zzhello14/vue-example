@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue template制作模板</title>
+</head>
+<body>
+    <h1>Vue template制作模板</h1>
+    <hr>
+    <h3>直接写在选项里的模板</h3>
+    <div id="app">
+        <template></template>
+    </div>
+    <br>
+    <h3>写在template标签里的模板</h3>
+    <div id="app2">
+        <template></template>
+    </div>
+    <br>
+    <h3>写在script标签里的模板</h3>
+    <div id="app3">
+        <template></template>
+    </div>
+
+    <!-- 写template标签 -->
+    <template id="tpID">
+        <h1 style="color:green">这是写在template标签里的模板</h1>
+    </template>
+
+    <!-- 写包含template的script -->
+    <script type="x-template" id="jsTemp">
+        <h1 style="color:blue">这是写在script标签中的模板，可以从外部引入js</h1>
+    </script>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:'#app',
+            data:{
+                message:"some message"
+            },
+            // 直接在template标签中写模板
+            template:`
+                <h1 style="color:red">这是选项模板</h1>
+            `
+        })
+        var app2 = new Vue({
+            el:'#app2',
+            // template绑定template标签
+            template:'#tpID'
+        })
+        var app3 = new Vue({
+            el:'#app3',
+            // template绑定js标签
+            template:'#jsTemp'
+        })
+    </script>
+</body>
+</html>
