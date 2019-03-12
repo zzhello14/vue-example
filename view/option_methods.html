@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue选项methods</title>
+</head>
+<body>
+    <h1>Vue选项-methods</h1>
+    <hr>
+    <div id="app">
+        <h3>methods中参数的传递</h3>
+        {{ count }}
+        <p><button @click="add(2)">add</button></p>
+        <br>
+        <h3>methods中的$event参数</h3>
+        <p><button @click="printEvent($event)" id="btnPrint">printEvent</button></p>
+        <br>
+        <h3>native修饰符-给组件绑定构造器里的原生事件</h3>
+        <btn @click.native="add(3)"></btn>
+        <br>
+        <br>
+        <h3>作用域外部调用构造器里的方法--慎用少用</h3>
+        <button onclick="app.add(4)">外部调用构造器里的方法</button>
+    </div>
+    <script type="text/javascript">
+        var btn = {
+            template:`<button>Add组件</button>`
+        }
+        var app = new Vue({
+            el:'#app',
+            data:{
+                count:0
+            },
+            methods:{
+                add:function(num){
+                    this.count += num;
+                },
+                printEvent(e){
+                    var el = e.currentTarget;
+                    alert(el.id);
+                    console.log(e);
+                }
+            },
+            components:{
+                "btn":btn
+            }
+        })
+    </script>
+</body>
+</html>
