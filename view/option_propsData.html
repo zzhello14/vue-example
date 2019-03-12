@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue选项propsData</title>
+</head>
+<body>
+    <h1>Vue选项-propsData全局扩展的数据传递</h1>
+    <hr>
+    <header></header>
+    <script type="text/javascript">
+        var myheader = Vue.extend({
+            template:`<p>{{message}}--{{param}}</p>`,
+            data:function(){
+                return{
+                    message:"study propsData"
+                }
+            },
+            props:['param']
+        });
+        // 通过propsData给扩展组件header传递数据
+        new myheader({propsData:{param:"value of param"}}).$mount('header');
+    </script>
+</body>
+</html>
