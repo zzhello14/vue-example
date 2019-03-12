@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue.component-组件props属性</title>
+</head>
+<body>
+    <h1>Vue.component-组件props属性</h1>
+    <hr>
+    <div>props选项就是设置和获取标签上的属性值</div>
+    <div id="app">
+        <div>父子组件vue实例构造器外面定义</div>
+        <!-- 引入组件 -->
+        <!-- username -->
+        <user username="用户姓名"></user>
+    </div>
+
+    <script type="text/javascript">
+        // 定义子组件
+        var addr = {
+            template:`
+                <div>
+                    <h3 style="color:red">这是子组件，狡兔三窟：</h3>
+                    <ol>
+                        <li>莫高窟</li>
+                        <li>吴哥窟</li>
+                        <li>长眼窟</li>
+                    </ol>
+                </div>
+            `
+        }
+        // 定义父组件
+        var user = {
+            // template模板中使用子组件
+            template:`
+                <div>
+                    <h2 style="color:red">这是父组件user：{{username}}</h2>
+                    <addr></addr>
+                </div>
+            `,
+            props:['username'],
+            // 引入子组件
+            components:{
+                "addr":addr
+            }
+        }
+
+        var app = new Vue({
+            el:'#app',
+            data:{
+            },
+            components:{
+                "user":user
+            }
+        })
+    </script>
+</body>
+</html>
