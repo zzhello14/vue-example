@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue.component-组件props属性</title>
+</head>
+<body>
+    <h1>Vue.component-组件props属性</h1>
+    <hr>
+    <div>component标签是Vue框架自定义的标签，它的用途就是可以动态绑定我们的组件，根据数据的不同更换不同的组件。</div>
+    <br>
+    <div id="app">
+        <div>点击按钮动态切换组件</div>
+        <p><button @click="changeComp">changeComp</button></p>
+        <!-- 使用component绑定组件-->
+        <!-- 也可以直接指定组件名称<component :is="'compBlue'"></component> -->
+        <component :is="compName"></component>
+    </div>
+
+    <script type="text/javascript">
+        // 定义组件
+        var compRed = {
+            template:`
+                <div><h2 style="color:red">这是Red组件</h2></div>
+            `
+        }
+        var compGreen = {
+            template:`
+                <div><h2 style="color:green">这是Green组件</h2></div>
+            `
+        }
+        var compBlue = {
+            template:`
+                <div><h2 style="color:blue">这是Blue组件</h2></div>
+            `
+        }
+
+        var app = new Vue({
+            el:'#app',
+            data:{
+                compName:"compRed"
+            },
+            components:{
+                "compRed":compRed,
+                "compGreen":compGreen,
+                "compBlue":compBlue
+            },
+            methods:{
+                changeComp:function(){
+                    if(this.compName == "compRed"){
+                        this.compName = "compGreen";
+                    }else if(this.compName == "compGreen"){
+                        this.compName = "compBlue";
+                    }else{
+                        this.compName = "compRed";
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
