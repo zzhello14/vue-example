@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue.component-组件props属性</title>
+</head>
+<body>
+    <h1>Vue.component-组件props属性</h1>
+    <hr>
+    <div>props选项就是设置和获取标签上的属性值</div>
+    <div id="app">
+        <h3>定义属性并获取属性值</h3>
+        <!-- 引入组件 -->
+        <!-- 设置someone属性值 -->
+        <zzhello someone="a man very fucking"></zzhello>
+        <br>
+        <br>
+        <h3>属性中带-符号的处理，属性使用小驼峰写法</h3>
+        <zzhello zz-name="what the fuck" :zzphone="phone"></zzhello>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:'#app',
+            data:{
+                phone:"999"
+            },
+            components:{
+                "zzhello":{
+                    // 组件中获取props属性值
+                    template:`
+                        <div>
+                            <h2 style="color:red">这是一个组件，这里可以获取props选项中someone属性的值：{{someone}}</h2>
+                            <div>这里获取另一个小驼峰属性zzName：{{zzName}}</div>
+                            <div>这个zzphone的值是vue实例构造器初始化的：{{zzphone}}</div>
+                        </div>
+                    `,
+                    props:['someone','zzName','zzphone']
+                }
+            }
+        })
+    </script>
+</body>
+</html>
