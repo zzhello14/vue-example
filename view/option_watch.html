@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue选项watch</title>
+</head>
+<body>
+    <h1>Vue选项-watch</h1>
+    <hr>
+    <div id="app">
+        <h3>监测Vue实例上的数据变动</h3>
+        <input type="text" v-model="demo">
+        <div>value值：{{value}}</div>
+        <br>
+        <h3>监测Vue实例上的对象（对象的属性）</h3>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:'#app',
+            data:{
+                demo:'',
+                value:''
+            },
+            watch:{
+                demo(val){
+                    this.value = this.demo;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
