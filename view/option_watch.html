@@ -9,24 +9,77 @@
     <h1>Vue选项-watch</h1>
     <hr>
     <div id="app">
-        <h3>监测Vue实例上的数据变动</h3>
+        <h3>监听Vue实例上的数据变动</h3>
         <input type="text" v-model="demo">
         <div>value值：{{value}}</div>
         <br>
-        <h3>监测Vue实例上的对象（对象的属性）</h3>
+        <h3>监听Vue实例上的对象（对象的属性），借助computed</h3>
+        <input type="text" v-model="demo2.name">
+        <div>value2值：{{value2}}</div>
+        <br>
+        <h3>监听Vue实例上的对象内部属性，不借助computed</h3>
+        <input type="text" v-model="children.name">
+        <div>value3值：{{children.name}}</div>
+        <br>
+        <div>温度监控实例</div>
+        <input type="text" v-model="temperature">
+        <div>{{desc}}</div>
     </div>
     <script type="text/javascript">
         var app = new Vue({
             el:'#app',
             data:{
                 demo:'',
-                value:''
+                demo2:{
+                    name:''
+                },
+                children:{
+                    name: '小强',
+                    age: 20,
+                    sex: '男'
+                },
+                value:'',
+                value2:'',
+                temperature:24,
+                desc:'舒适'
+            },
+            computed:{
+                newname(){
+                    return this.demo2.name;
+                }
             },
             watch:{
                 demo(val){
-                    this.value = this.demo;
+                    this.value = val;
+                },
+                newname(val){
+                    this.value2 = val;
+                },
+                children:{
+                    handler:function(val,oldval){
+                        console.log(val.name);
+                    },
+                    // 对象内部的属性监听，也叫深度监听
+                    deep:true
+                },
+                // 键路径必须加上引号
+                'children.name':function(val,oldval){
+                    console.log(val);
+                },
+                temperature:function(val,oldval){
+                    if(val<20){
+                        this.desc="好冷";
+                    }else if(val < 26){
+                        this.desc="舒适"
+                    }else{
+                        this.desc="热死";
+                    }
                 }
             }
+        })
+        // 主动调用$watch方法来进行数据监测
+        app.$watch("demo",function(val,oldval){
+            console.log(val);
         })
     </script>
 </body>
