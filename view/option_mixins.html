@@ -14,8 +14,14 @@
         {{num}}
         <p><button @click="add">add</button></p>
         <div><b>mixins对象相当于多继承</b></div>
+        <ol>
+            <li>mixin对象相当于父类，vue实例相当于子类</li>
+            <li>vue实例与mixin对象的生命周期函数、选项调用顺序等同于父类与子类的调用顺序</li>
+            <li>混入多个对象时，调用顺序按照混入顺序</li>
+            <li>vue实例的methods中的方法与mixin中的方法名称相同时，调用的是vue实例的方法，相当于覆盖</li>
+        </ol>
         <br>
-        <div>慎用全局混入Vue.mixin({}),一旦使用全局混入对象，将会影响到 所有 之后创建的 Vue 实例。</div>
+        <div>慎用全局混入Vue.mixin({}),一旦使用全局混入对象，将会影响到所有之后创建的Vue实例。</div>
     </div>
     <script type="text/javascript">
         var mixin = {

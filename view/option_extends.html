@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue选项extends</title>
+</head>
+<body>
+    <h1>Vue选项-extends</h1>
+    <hr>
+    <div id="app">
+        <div>扩展 (extends) 同混入mixins类似，可视为单继承。</div>
+        <br>
+        {{num}}
+        <p><button @click="add">add</button></p>
+    </div>
+    <script type="text/javascript">
+        var extend = {
+            created: function() {
+                console.log("extend对象的created")
+            },
+            updated: function(){
+                console.log("extend对象的updated");
+            },
+            methods:{
+                add:function(){
+                    console.log("调用extend对象的方法");
+                }
+            }
+        }
+        var app = new Vue({
+            el:'#app',
+            data:{
+                num:0
+            },
+            created:function(){
+                console.log("vue对象的created");
+            },
+            updated:function(){
+                console.log("vue对象的updated");
+            },
+            methods:{
+                add:function(){
+                    console.log("调用vue对象的方法")
+                    this.num++;
+                }
+            },
+            extends:extend
+        })
+    </script>
+</body>
+</html>
