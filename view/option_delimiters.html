@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>Vue选项delimiters</title>
+</head>
+<body>
+    <h1>Vue选项-delimiters</h1>
+    <hr>
+    <div id="app">
+        <div>delimiters分隔符的作用是转换vue默认的文本插值<span v-text="defaultDel"></span>双大括号的形式</div>
+        <br>
+        {num}
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:'#app',
+            data:{
+                num:0,
+                defaultDel:"{{}}"
+            },
+            // 分隔符的值是一个长度为2的数组，分别表示分隔符的两端
+            delimiters:['{','}']
+        })
+    </script>
+</body>
+</html>
