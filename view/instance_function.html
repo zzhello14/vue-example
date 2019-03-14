@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <!-- <script type="text/javascript" src="../assets/js/jquery-3.3.1.min.js"></script> -->
+    <title>Vue实例-方法</title>
+</head>
+<body>
+    <h1>Vue实例-方法</h1>
+    <hr>
+    <h3>mount()方法</h3>
+    <div>用于vue的扩展实例，将扩展实例挂载到页面的标签上</div>
+    <div id="extend">
+    </div>
+    
+    <br>
+    <h3>destroy()方法</h3>
+    <div>用于将vue实例销毁，即是将与页面标签的绑定解绑</div>
+    <div><button onclick="destroy()">卸载vue实例</button></div>
+
+    <br>
+    <h3>forceUpdate()方法</h3>
+    <div>强制刷新页面。上面扩展实例，changeArray按钮改变了数组array的元素值，但不会自动刷新，使用forceUpate()方法可刷新页面。</div>
+    <div><button onclick="update()">刷新vue实例</button></div>
+
+    <br>
+    <h3>nextTick()方法</h3>
+    <div>vue的data被修改后调用的钩子函数，形参是一个回调函数。</div>
+    <div><button onclick="updateValue()">更新数据后看日志</button></div>
+
+    <script type="text/javascript">
+        // 定义扩展实例
+        var extendVue = Vue.extend({
+            template:`<div style="background:#DCDCDC">
+                <div>{{message}}</div>
+                <div>value:{{num}}</div>
+                <div>array:{{array}}</div>
+                <div><button @click="changeValue">changeValue</button> <button @click="changeArray">changeArray</button></div>
+            </div>
+            `,
+            data:function(){
+                return{
+                    num:0,
+                    message:'hello extend vue!',
+                    array:['aa','bb','cc']
+                }
+            },
+            methods:{
+                changeValue:function(){
+                    this.num++;
+                    this.array[1]='dd'
+                },
+                changeArray:function(){
+                    this.array[1]='dddd'
+                }
+            }
+        })
+        // 创建实例并将实例挂载到页面标签
+        var vm = new extendVue().$mount('#extend');
+        
+        // 卸载vue实例
+        function destroy(){
+            console.log("卸载前面mount()绑定的vue实例，add按钮已不起作用")
+            vm.$destroy();
+        }
+
+        // 刷新vue实例
+        function update(){
+            console.log("刷新vue实例")
+            vm.$forceUpdate();
+        }
+
+        // 更新扩展实例数据
+        function updateValue(){
+            // 调用扩展实例的方法
+            vm.changeValue();
+            vm.$nextTick(function(){
+                console.log("value已被更新")
+            })
+        }
+    </script>
+</body>
+</html>
