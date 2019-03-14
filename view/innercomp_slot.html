@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>内置组件slot</title>
+</head>
+<body>
+    <h1>内置组件-slot命名插槽</h1>
+    <hr>
+    <div id="app">
+        <div>
+            slot是标签的内容扩展，也就是说你用slot就可以在自定义组件时传递给组件内容，组件接收内容并输出。<br>
+            模板中使用<span v-text="slotHtml"></span>标签占坑，组件标签中使用带slot=""属性的标签填坑
+        </div>
+        <info>
+            <!-- 组件中的没有slot属性的标签会被组件模板的内容替换 -->
+            <div>i don't to be cleared</div>
+            <!-- 填坑：组件标签中使用带有slot属性的标签填坑 -->
+            <span slot="name">zzhello</span>
+            <div slot="qq">{{qq}}</div>
+            <button slot="email">{{email}}</button>
+        </info>
+    </div>
+
+    <!-- 定义模板 -->
+    <template id="tmp">
+        <div>
+            <!-- 占坑：模板中使用slot标签占坑 -->
+            <ul>
+                <li>姓名：<slot name="name"></slot></li>
+                <li>QQ：<slot name="qq"></slot></li>
+                <li>邮箱：<slot name="email"></slot></li>
+            </ul>
+        </div>
+    </template>
+
+    <script type="text/javascript">
+        // 定义组件
+        var info = {
+            template:'#tmp'
+        }
+
+        var app=new Vue({
+            el:'#app',
+            data:{
+                name:'zzhello',
+                qq:'181031355',
+                email:'chunbin_li@126.com',
+                slotHtml:'<slot name=""></slot>'
+            },
+            components:{
+                "info":info
+            }
+        })
+    </script>
+</body>
+</html>
