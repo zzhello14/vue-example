@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <!-- <script type="text/javascript" src="../assets/js/jquery-3.3.1.min.js"></script> -->
+    <title>Vue实例-事件</title>
+</head>
+<body>
+    <h1>Vue实例-事件</h1>
+    <hr>
+    <div id="app">
+        <div>实例事件就是在构造器外部写一个调用构造器内部的方法。这样写的好处是可以通过这种写法在构造器外部调用构造器内部的数据。</div>
+        {{num}}
+    </div>
+    <br>
+    <h3>$on事件-在构造器外部添加事件</h3>
+    <div>app.$on('eventName',callback)，2个参数是事件名和匿名函数（事件/方法的执行函数）</div>
+    <br>
+    <br>
+    <h3>$once事件-注册只调用1次事件</h3>
+    <div>app.$once('eventName',callback)，参数是事件名和匿名函数</div>
+    <br>
+    <br>
+    <h3>$emit事件-在构造器外部调用事件</h3>
+    <div>app.$emit('eventName')，参数是事件名</div>
+    <div>
+        <button onclick="add()">add</button>
+        <button onclick="addOnce()">addOnce</button>
+    </div>
+    <br>
+    <br>
+    <h3>$off事件-关闭注册的事件</h3>
+    <div>app.$off('eventName')，参数是事件名，关闭后事件不再执行</div>
+    <div>
+        <button onclick="off()">off</button>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:'#app',
+            data:{
+                num:0
+            }
+        })
+        // 注册事件
+        app.$on('add',function(){
+            console.log('这是在外部注册的事件');
+            this.num++;
+        });
+
+        app.$once('addOnce',function(){
+            console.log('这是在外部注册的只执行1次的事件');
+            this.num++;
+        })
+
+        function add(){
+            // 调用事件
+            app.$emit('add');
+        }
+
+        function addOnce(){
+            // 调用事件
+            app.$emit('addOnce');
+        }
+
+        function off(){
+            // 关闭事件
+            console.log("关闭了事件add")
+            app.$off('add');
+        }
+
+    </script>
+</body>
+</html>
