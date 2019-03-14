@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-3.3.1.min.js"></script>
+    <title>Vue实例-属性</title>
+</head>
+<body>
+    <h1>Vue实例-属性</h1>
+    <hr>
+    <div id="app">
+        <div id="msg">{{message}}</div>
+    </div>
+    <button onclick="printVue()">打印vue实例</button>
+
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                message:'hello Vue!'
+            },
+            // 在vue中使用jquery
+            mounted:function() {
+                $('#msg').html("使用jquery设置标签的内容");   
+            },
+            methods:{
+                view:function(){
+                    console.log(app);
+                }
+            }
+        })
+        // vue实例调用自定义方法
+        function printVue(){
+            app.view();
+        }
+    </script>
+</body>
+</html>
